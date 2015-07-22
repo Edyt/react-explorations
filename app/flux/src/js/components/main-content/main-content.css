@@ -1,0 +1,42 @@
+.container {
+  /* padding-left === sidebar's width + 70px */
+  padding: 70px 70px 70px 320px;
+}
+
+
+.header {
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  font-weight: 100;
+  font-size: 30px;
+}
+
+
+.tab {
+  margin-top: 100px;
+}
+
+
+
+
+
+/* GRID */
+.grid {
+  font-size: 0;
+}
+
+    .colLg6 {
+      display: inline-block;
+      width: 50%;
+      vertical-align: top;
+      font-size: 16px;
+    }
+
+    .colLg6:first-child {
+      padding-right: 10px;
+    }
+
+    .colLg6 +
+    .colLg6 {
+      padding-left: 10px;
+    }

@@ -1,0 +1,106 @@
+[
+  {
+    "id": "c_1",
+    "name": "Button",
+    "html": "<button>Click Me</button>",
+    "css":  "button {\n  border: none;\n}",
+    "js":   "function myButton() { \n  var x = document.getElementById('demo'); \n  x.style.fontSize = '25px'; \n  x.style.color = 'red'; \n}",
+    "docs": [
+      {
+        "name": "Development Instruction",
+        "markdown": "## Development Instruction\n\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, iste magni, dolore illo vitae ipsum. Quod aliquid sapiente neque. Nihil!"
+      },
+
+      {
+        "name": "Accessibility",
+        "markdown": "## Accessibility"
+      },
+
+      {
+        "name": "PRD",
+        "markdown": "## PRD"
+      },
+
+      {
+        "name": "User Manual",
+        "markdown": "## User Manual"
+      },
+
+      {
+        "name": "Testing",
+        "markdown": "## Testing"
+      }
+    ]
+  },
+
+
+  {
+    "id": "c_2",
+    "name": "Typography",
+    "html": "<h1>Header 1</h1>",
+    "css":  "h1 {\n  font-size: 26px;\n}",
+    "js":   "function myHeader() { \n  var x = document.getElementById('HEADER'); \n  x.style.fontSize = '25px'; \n  x.style.color = 'red'; \n}",
+    "docs": [
+      {
+        "name": "Development Instruction",
+        "markdown": "## Development Instruction"
+      },
+
+      {
+        "name": "Accessibility",
+        "markdown": "## Accessibility"
+      },
+
+      {
+        "name": "PRD",
+        "markdown": "## PRD"
+      },
+
+      {
+        "name": "User Manual",
+        "markdown": "## User Manual"
+      },
+
+      {
+        "name": "Testing",
+        "markdown": "## Testing"
+      }
+    ]
+  },
+
+
+  {
+    "id": "c_3",
+    "name": "Link",
+    "html": "<a href='#'>I am a Link!</a>",
+    "css":  "a {\n  color: #dadada;\n}",
+    "js":   "function myLink() { \n  var x = document.getElementById('LINK'); \n  x.style.fontSize = '25px'; \n  x.style.color = 'red'; \n}",
+    "docs": [
+      {
+        "name": "Development Instruction",
+        "markdown": "## Development Instruction"
+      },
+
+      {
+        "name": "Accessibility",
+        "markdown": "## Accessibility"
+      },
+
+      {
+        "name": "PRD",
+        "markdown": "## PRD"
+      },
+
+      {
+        "name": "User Manual",
+        "markdown": "## User Manual"
+      },
+
+      {
+        "name": "Testing",
+        "markdown": "## Testing"
+      }
+    ]
+  }
+
+]
