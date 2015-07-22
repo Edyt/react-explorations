@@ -8,7 +8,7 @@ var AppContainer = require('./components/AppContainer');
 
 
 
-// Retrieve data through Ajax
+// Page load calls a ServerUtils method to fetch the data from the server.
 ServerUtils.getAllComponents();
 
 React.render(

@@ -16,6 +16,7 @@ var SidebarButtons = module.exports = React.createClass({
     currentComponentID: React.PropTypes.string
   },
 
+  // When user clicks the button, initialize an Action.
   handleClick() {
     var componentID = this.props.componentID;
     ComponentListActions.clickButton(componentID);

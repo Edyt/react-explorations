@@ -11,7 +11,8 @@ var styles = require('./sidebar.css');
 
 
 
-// Structure the `View State` through the Data retrieved from the Store
+// Controller-View
+// Grab data from the Store using the Store's Getter methods
 function getStateFromStores() {
   return {
     componentList: ComponentListStore.getAll(),
@@ -25,14 +26,13 @@ function getStateFromStores() {
 
 var SidebarSection = module.exports = React.createClass({
 
-  // Import a set of Reflux Mixins to use within the component
+  // Import Reflux Mixins to listen to the store (i.e. through "listenTo" method).
   mixins: [Reflux.ListenerMixin],
 
   getInitialState() {
     return getStateFromStores();
   },
 
-  // MOST IMPORTANT!!
   // Set-up communication between `Store` and `View`.
   // Data changes in the `Store` trigger the `setState` method in the View which will activate `Virtual DOM` to make appropriate changes in the UI
   componentDidMount() {
@@ -58,8 +58,9 @@ var SidebarSection = module.exports = React.createClass({
     )
   },
 
-  // This method is sent to the Store Listener (i.e. in componentDidMount) as a callback
-  // Whenever there is a change in the store, this callback method will be called and trigger the `setState` method to refresh the UI
+  /**
+   * Event handler for 'change' events coming from the ComponentListStore
+   */
   _onChange() {
     this.setState(getStateFromStores());
   }

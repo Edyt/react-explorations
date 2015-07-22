@@ -3,26 +3,30 @@ var _ = require('lodash');
 var ComponentListActions = require('../actions/ComponentListActions');
 
 
-var _componentList = {},
+var _components = {},
     _currentComponentID = null;
+
+
+
 
 
 var ComponentListStore = Reflux.createStore({
 
-  // Listen to the particular set of `Action` interface
+  // - Listen to the Store defined in the value (i.e. ComponentListActions).
   listenables: ComponentListActions,
 
   // - page load calls for all components from store
   // - dispatch sends response data to this method / handler
-  // - this method / handler processes the response data and assigns components into _componentList
+  // - this method / handler processes the response data and assigns components into _components
+  // - naming convention for action listener method is
+  //   "on" + "ActionName" (first letter of the action name needs to be capitalized)
   onProcessRawComponents(rawComponents) {
 
-    // Build a new data architecture for each `component`
+    // Process the raw data and store it inside _components.
     rawComponents.forEach(function(component) {
-
       var componentID = component.id;
 
-      _componentList[componentID] = {
+      _components[componentID] = {
         id: componentID,
         name: component.name,
         html: component.html,
@@ -32,15 +36,14 @@ var ComponentListStore = Reflux.createStore({
       };
     }, this);
 
-    // Initialize current component
+    // Assign the current active component. In the app, we want to know which component is being active so we can assign the "is-active" class as well as display data that belong to only that component.
     if(!_currentComponentID) {
-      // Data is stored in an object (i.e. _componentList). To retrieve information of a component, we are required to know `component ID. Our goal here is to simply assign a `current state` on a Component; so the easiest way for us to convert the data from `Object` form into `Array` form. With Array, we can easily access a particular Component through an `array index`
+      // Process _components object and convert it into an array then assign the first index / element to be active.
       var sortedList = this.getSortedList();
       _currentComponentID = sortedList[0].id;
     }
 
-    // Send out the `change` event listener
-    // The View that listen to the changes in this Store will receive new `State`
+    // Emit change event to re-render the View
     this.trigger();
   },
 
@@ -50,15 +53,15 @@ var ComponentListStore = Reflux.createStore({
   },
 
   get(name) {
-    return _componentList[name];
+    return _components[name];
   },
 
   getAll() {
-    return _componentList;
+    return _components;
   },
 
   getCurrentComponent() {
-    return _componentList[_currentComponentID];
+    return _components[_currentComponentID];
   },
 
   getCurrentComponentID() {
@@ -68,7 +71,7 @@ var ComponentListStore = Reflux.createStore({
   getSortedList() {
     var orderedList = [];
 
-    _.each(_componentList, function(component) {
+    _.each(_components, function(component) {
       orderedList.push(component);
     });
 

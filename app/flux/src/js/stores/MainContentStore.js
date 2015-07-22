@@ -7,10 +7,8 @@ var ActionTypes = ActionConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 
 
-// STORE
 var ComponentListStore = require('./ComponentListStore');
 
-// DATA
 var _component = {};
 
 
@@ -42,17 +40,20 @@ var MainContentStore = assign({}, EventEmitter.prototype, {
 
 
 // Register Store to dispatcher
+// All Actions sent out from the Dispatcher will be filtered based on Type
 MainContentStore.dispatchToken = AppDispatcher.register(function(action) {
 
   switch(action.type) {
 
     case ActionTypes.CLICK_BUTTON:
       _component = ComponentListStore.getCurrentComponent();
+      // Emit change event to re-render the View
       MainContentStore.emitChange();
       break;
 
     case ActionTypes.RECEIVE_RAW_COMPONENTS:
       _component = ComponentListStore.getCurrentComponent();
+      // Emit change event to re-render the View
       MainContentStore.emitChange();
       break;
 

@@ -15,6 +15,8 @@ require('../../../css/plugins/simpleTab.css');
 
 
 
+// Controller-View
+// Grab data from the Store using the Store's Getter methods
 function getStateFromStores() {
   return {
     component: MainContentStore.getComponent()
@@ -27,13 +29,15 @@ function getStateFromStores() {
 
 var MainContent = module.exports = React.createClass({
 
-  // Import a set of Reflux Mixins to use within the component
+  // Import Reflux Mixins to listen to the store (i.e. through "listenTo" method).
   mixins: [Reflux.ListenerMixin],
 
   getInitialState() {
     return getStateFromStores();
   },
 
+  // Set-up communication between `Store` and `View`.
+  // Data changes in the `Store` trigger the `setState` method in the View which will activate `Virtual DOM` to make appropriate changes in the UI
   componentDidMount() {
     this.listenTo(MainContentStore, this._onChange);
   },

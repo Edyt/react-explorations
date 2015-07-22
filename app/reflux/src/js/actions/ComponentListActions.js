@@ -4,8 +4,9 @@ var Reflux = require('reflux');
 
 
 
-// A collection of `Action` interfaces
-// These actions build the communication between View/Utils to the Store
+// - A list of Action interfaces created by Reflux.
+// - This establishes communication with the Store.
+// - When an Action is triggered, either from User or Server, all the Stores that "listened" will be notified about the Action.
 module.exports = Reflux.createActions([
   'processRawComponents',
   'clickButton'

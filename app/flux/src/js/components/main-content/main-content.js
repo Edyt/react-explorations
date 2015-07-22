@@ -13,6 +13,9 @@ require('../../../css/plugins/simpleTab.css');
 
 
 
+
+// Controller-View
+// Grab data from the Store using the Store's Getter methods
 function getStateFromStores() {
   return {
     component: MainContentStore.getComponent()
@@ -29,6 +32,8 @@ var MainContent = module.exports = React.createClass({
     return getStateFromStores();
   },
 
+  // Set-up communication between `Store` and `View`.
+  // Data changes in the `Store` trigger the `setState` method in the View which will activate `Virtual DOM` to make appropriate changes in the UI
   componentDidMount() {
     MainContentStore.addChangeListener(this._onChange);
 

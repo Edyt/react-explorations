@@ -8,9 +8,7 @@ var ActionTypes = ActionConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 
 
-// DATA
-// _componentList stores all the component data
-var _componentList = {},
+var _components = {},
     _currentComponentID = null;
 
 
@@ -21,34 +19,29 @@ var ComponentListStore = assign({}, EventEmitter.prototype, {
 
   init(rawComponents) {
 
-    // Build a new data architecture for each `component`
+    // Process the raw data and store it inside _components.
     rawComponents.forEach(function(component) {
-      var componentID = component.id,
-          componentName = component.name,
-          componentHTML = component.html,
-          componentCSS = component.css,
-          componentJS = component.js,
-          componentDocs = component.docs;
+      var componentID = component.id;
 
-      _componentList[componentID] = {
+      _components[componentID] = {
         id: componentID,
-        name: componentName,
-        html: componentHTML,
-        css: componentCSS,
-        js: componentJS,
-        docs: componentDocs
+        name: component.name,
+        html: component.html,
+        css: component.css,
+        js: component.js,
+        docs: component.docs
       };
     }, this);
 
-    // Initialize current component
+    // Assign the current active component. In the app, we want to know which component is being active so we can assign the "is-active" class as well as display data that belong to only that component.
     if(!_currentComponentID) {
-      // Data is stored in an object (i.e. _componentList). To retrieve information of a component, we are required to know `component ID. Our goal here is to simply assign a `current state` on a Component; so the easiest way for us to convert the data from `Object` form into `Array` form. With Array, we can easily access a particular Component through `array index`
+
+      // Process _components object and convert it into an array then assign the first index / element to be active.
       var sortedList = this.getSortedList();
       _currentComponentID = sortedList[0].id;
     }
   },
 
-  // `emit` method sends out a `named` event to be listened by the `on` method
   emitChange() {
     this.emit(CHANGE_EVENT);
   },
@@ -57,7 +50,7 @@ var ComponentListStore = assign({}, EventEmitter.prototype, {
    * @param {function} callback
    */
 
-  // Trigger everytime an `event` is sent out by `emit` method
+  // Actively listen to change event
   addChangeListener(callback) {
     this.on(CHANGE_EVENT, callback);
   },
@@ -67,15 +60,15 @@ var ComponentListStore = assign({}, EventEmitter.prototype, {
   },
 
   get(name) {
-    return _componentList[name];
+    return _components[name];
   },
 
   getAll() {
-    return _componentList;
+    return _components;
   },
 
   getCurrentComponent() {
-    return _componentList[_currentComponentID];
+    return _components[_currentComponentID];
   },
 
   getCurrentComponentID() {
@@ -85,7 +78,7 @@ var ComponentListStore = assign({}, EventEmitter.prototype, {
   getSortedList() {
     var orderedList = [];
 
-    _.each(_componentList, function(component) {
+    _.each(_components, function(component) {
       orderedList.push(component);
     });
 
@@ -96,19 +89,20 @@ var ComponentListStore = assign({}, EventEmitter.prototype, {
 
 
 // Register Store to dispatcher
-// `Actions` sent out from the Dispatcher will be filter out based on their `Type`.
+// All Actions sent out from the Dispatcher will be filtered based on Type
 ComponentListStore.dispatchToken = AppDispatcher.register(function(action) {
 
-  // Each `case` in the `switch` represent each Action Type.
   switch(action.type) {
 
     case ActionTypes.CLICK_BUTTON:
       _currentComponentID = action.currentComponentID;
+      // Emit change event to re-render the View
       ComponentListStore.emitChange();
       break;
 
     case ActionTypes.RECEIVE_RAW_COMPONENTS:
       ComponentListStore.init(action.rawComponents);
+      // Emit change event to re-render the View
       ComponentListStore.emitChange();
       break;
 

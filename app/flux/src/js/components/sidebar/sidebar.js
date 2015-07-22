@@ -10,7 +10,8 @@ var styles = require('./sidebar.css');
 
 
 
-// Structure the `Component State` from data retrieved from the `Store`
+// Controller-View
+// Grab data from the Store using the Store's Getter methods
 function getStateFromStores() {
   return {
     componentList: ComponentListStore.getAll(),
@@ -28,7 +29,6 @@ var SidebarSection = module.exports = React.createClass({
     return getStateFromStores();
   },
 
-  // MOST IMPORTANT!!
   // Set-up communication between `Store` and `View`.
   // Data changes in the `Store` trigger the `setState` method in the View which will activate `Virtual DOM` to make appropriate changes in the UI
   componentDidMount() {
@@ -63,9 +63,6 @@ var SidebarSection = module.exports = React.createClass({
     )
   },
 
-  /**
-   * Event handler for 'change' events coming from the ComponentListStore
-   */
   _onChange() {
     this.setState(getStateFromStores());
   }

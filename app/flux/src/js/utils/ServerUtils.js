@@ -5,13 +5,16 @@ var ServerActionCreators = require('../actions/ServerActionCreators');
 
 
 module.exports = {
+
+  // Page load triggers this method to grab data from a file.
   getAllComponents() {
     $.ajax({
       url: "src/data.json",
       method: "GET",
       dataType: "JSON",
+
+      // If success, tell ServerActionCreators to grab the fetched data and prepare an Action.
       success: function(data) {
-        // After successfully retrieve data, call an `Action Creator` method to help set up an `Action Call` to send to `store` through a `dispatcher`
         ServerActionCreators.receiveAll(data);
       },
       error: function(err) {

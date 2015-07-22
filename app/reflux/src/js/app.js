@@ -10,7 +10,7 @@ var AppContainer = require('./components/AppContainer');
 
 
 
-// - Upon page load, fetch all data from the file (or Database)
+// Page load calls a ServerUtils method to fetch the data from the server.
 ServerUtils.getAllComponents();
 
 React.render(

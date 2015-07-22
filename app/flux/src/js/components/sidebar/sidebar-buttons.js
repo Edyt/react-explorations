@@ -16,6 +16,7 @@ var SidebarButtons = module.exports = React.createClass({
     currentComponentID: React.PropTypes.string
   },
 
+  // When user clicks the button, calls Action Creator to prepare and dispatch Action to the Dispatcher
   handleClick() {
     var componentID = this.props.componentID;
     SidebarActionCreators.clickButton(componentID);
