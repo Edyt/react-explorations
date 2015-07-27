@@ -1,5 +1,7 @@
 # Installation
 
+Environment preparations:
+
 First, [install node.js](https://nodejs.org/) (it ships with Mac OS X as of 10.9)
 
 Then, install Webpack:
@@ -8,7 +10,15 @@ Then, install Webpack:
 npm install webpack -g
 ```
 
-Next, install dependencies
+And the `webpack-dev-server`:
+
+```shell
+npm install webpack-dev-server -g
+```
+
+After that, you can install the application.
+
+First, install the dependencies:
 ```
 npm install
 ```
@@ -20,7 +30,7 @@ webpack
 ```
 
 
-Finally, let's run the Webpack development server
+Finally, run the Webpack development server
 ```
 npm start
 ```
@@ -29,5 +39,3 @@ npm start
 To view `Flux App`, go to `http://localhost:8080/app/flux`.
 
 To view `Reflux App`, go to `http://localhost:8080/app/reflux`.
-
-
