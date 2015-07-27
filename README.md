@@ -1,6 +1,14 @@
 # Installation
 
-First, install dependencies
+First, [install node.js](https://nodejs.org/) (it ships with Mac OS X as of 10.9)
+
+Then, install Webpack:
+
+```shell
+npm install webpack -g
+```
+
+Next, install dependencies
 ```
 npm install
 ```
