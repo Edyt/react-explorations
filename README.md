@@ -19,19 +19,19 @@ npm install webpack-dev-server -g
 After that, you can install the application.
 
 First, install the dependencies:
-```
+```shell
 npm install
 ```
 
 
 Then, let Webpack build the files
-```
+```shell
 webpack
 ```
 
 
 Finally, run the Webpack development server
-```
+```shell
 npm start
 ```
 
